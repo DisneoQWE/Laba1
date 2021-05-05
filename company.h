@@ -29,7 +29,7 @@ public:
      * значениями которого являются возможные типы предприятий.
 */
     enum type{
-        Private, Multinational, Government
+        Local, Multinational, Government
     };
     company(QString &name, QVector<QString> &owners,
             double income = 0, double area = 0, int numOfEmps = 0); //конструктор
@@ -37,15 +37,47 @@ public:
 
     /*Для каждого из этих свойств должны быть реализованы
      * методы их получения/изменения.*/
-    double getIncome() const;
-    double getArea() const;
-    void setArea(double value);
-    int getEmployeeNumber() const;
-    void setEmployeeNumber(int value);
-    QList<QString> getOwners() const;
-    void setOwners(const QList<QString> &value);
-    QString getName() const;
-    void setName(const QString &value);
+    virtual type getType() = 0;
+    virtual double getTaxPerMonth() = 0;
+    double getIncome() const{
+        return income;
+    }
+    double getArea() const{
+        return area;
+    }
+    int getEmployeeNumber() const{
+        return employeeNumber;
+    }
+    QList<QString> getOwners() const{
+        return owners;
+    }
+    QString getName() const{
+        return name;
+    }
+};
+
+
+/*Далее, требуется реализовать три класса предприятий различных типов.*/
+class LocalCompany: public company{
+public:
+    LocalCompany(QString &name, QList<QString> &owners,
+    double income    = 0, double area = 0, int numberOfEmployees = 0);
+    type getType();
+    double getTaxPerMonth();
+};
+class MultinationalCompany: public company{
+public:
+    MultinationalCompany(QString &name, QList<QString> &owners,
+                         double income = 0, double area = 0, int numberOfEmployees = 0);
+    type getType();
+    double getTaxPerMonth();
+};
+class GovernmentCompany : public company{
+public:
+   GovernmentCompany(QString &name, QList<QString> &owners,
+                     double income = 0, double area = 0, int numberOfEmployees = 0);
+   type getType();
+   double getTaxPerMonth();
 };
 
 #endif // COMPANY_H
