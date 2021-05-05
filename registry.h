@@ -1,11 +1,15 @@
 #ifndef REGISTRY_H
 #define REGISTRY_H
-
-
-class registry
-{
+#include <QList>
+/*
+ * Класс reqistry представляет собой класс синглтон
+*/
+class registry{
+private:
+    QList
 public:
     registry();
+
 };
 
 #endif // REGISTRY_H
