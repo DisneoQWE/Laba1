@@ -31,8 +31,9 @@ public:
     enum type{
         Local, Multinational, Government
     };
-    company(QString &name, QVector<QString> &owners,
-            double income = 0, double area = 0, int numOfEmps = 0); //конструктор
+    company(QString &name, QList<QString> &owners,
+            double income = 0, double area = 0,
+            int numOfEmps = 0); //конструктор
     virtual ~company() {} //деструктор
 
     /*Для каждого из этих свойств должны быть реализованы

@@ -1,56 +1,57 @@
 #include "company.h"
 
-QList<QString> company::getOwners() const
+company::company(QString &name, QList<QString> &owners,
+                 double income, double area, int employeeNumber)
 {
-    return owners;
+    this->name = name;
+    this->owners = owners;
+    this->income = income;
+    this->area = area;
+    this->employeeNumber = employeeNumber;
 }
 
-void company::setOwners(const QList<QString> &value)
+
+company::type LocalCompany::getType()
 {
-    owners = value;
+    return type::Local;
 }
 
-QString company::getName() const
+LocalCompany::LocalCompany(QString &name, QList<QString> &owners,
+    double income, double area, int employeeNumber)
+    : company(name, owners, income, area, employeeNumber) {}
+
+double LocalCompany::getTaxPerMonth()
 {
-    return name;
+    return getEmployeeNumber() * getArea() / getIncome() * 2.5;
 }
 
-void company::setName(const QString &value)
+
+MultinationalCompany::MultinationalCompany(QString &name,
+QList<QString> &owners, double income, double area,
+int employeeNumber): company(name, owners, income, area, employeeNumber) {}
+
+company::type MultinationalCompany::getType()
 {
-    name = value;
+    return type::Multinational;
 }
 
-company::company()
+double MultinationalCompany::getTaxPerMonth()
 {
-
+    return getEmployeeNumber() * getArea() / getIncome() * 3;
 }
 
-double company::getArea() const
+
+GovernmentCompany::GovernmentCompany(QString &name,
+QList<QString> &owners,double income, double area,
+int numberOfEmployees): company(name, owners, income, area, numberOfEmployees) {}
+
+company::type GovernmentCompany::getType()
 {
-    return area;
+    return type::Government;
 }
 
-void company::setArea(double value)
+double GovernmentCompany::getTaxPerMonth()
 {
-    area = value;
-}
-
-int company::getEmployeeNumber() const
-{
-    return employeeNumber;
-}
-
-void company::setEmployeeNumber(int value)
-{
-    employeeNumber = value;
-}
-
-double company::getIncome() const
-{
-    return income;
-}
-
-void company::setIncome(double value)
-{
-    income = value;
+    return getEmployeeNumber() * getArea() / getIncome() * 1;
+;
 }

@@ -13,12 +13,14 @@ private:
         companyList(cl) {}
     registry() {}
 public:
+
     registry(registry& re) = delete;
     void operator=(const registry& re) = delete;
     static registry& getInstance();
     void AddCompany(company& c);
     company* getCompanyByIndex(int index) const;
     int getRegistrySize() const;
+    void setCompanyList(const QList<company *> &compnayList);
 };
 
 #endif // REGISTRY_H
